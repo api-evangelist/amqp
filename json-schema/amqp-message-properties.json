@@ -1,0 +1,87 @@
+{
+  "$id": "amqp-message-properties.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AMQP Message Properties",
+  "description": "Schema describing the standard AMQP 0-9-1 message properties (Basic.Properties). These properties are defined in the AMQP specification and provide metadata about the message content, delivery, and routing.",
+  "type": "object",
+  "properties": {
+    "contentType": {
+      "type": "string",
+      "description": "MIME content type of the message body (e.g., application/json, text/plain).",
+      "examples": [
+        "application/json",
+        "text/plain",
+        "application/octet-stream"
+      ]
+    },
+    "contentEncoding": {
+      "type": "string",
+      "description": "MIME content encoding of the message body (e.g., utf-8, gzip).",
+      "examples": [
+        "utf-8",
+        "gzip"
+      ]
+    },
+    "headers": {
+      "type": "object",
+      "description": "Application-specific message headers as an AMQP field table.",
+      "additionalProperties": true
+    },
+    "deliveryMode": {
+      "type": "integer",
+      "description": "Message delivery mode. 1 = non-persistent (may be lost on broker restart), 2 = persistent (written to disk).",
+      "enum": [1, 2]
+    },
+    "priority": {
+      "type": "integer",
+      "description": "Message priority level from 0 (lowest) to 9 (highest).",
+      "minimum": 0,
+      "maximum": 9
+    },
+    "correlationId": {
+      "type": "string",
+      "description": "Application-defined correlation identifier, typically used to correlate RPC responses with requests.",
+      "format": "uuid"
+    },
+    "replyTo": {
+      "type": "string",
+      "description": "Name of the queue to which replies should be sent, used in the request/reply messaging pattern."
+    },
+    "expiration": {
+      "type": "string",
+      "description": "Message expiration (TTL) as a string representing milliseconds. The message will be discarded after this duration.",
+      "pattern": "^[0-9]+$"
+    },
+    "messageId": {
+      "type": "string",
+      "description": "Application-defined unique message identifier.",
+      "format": "uuid"
+    },
+    "timestamp": {
+      "type": "integer",
+      "description": "Message timestamp as a UNIX epoch timestamp (seconds since 1970-01-01T00:00:00Z)."
+    },
+    "type": {
+      "type": "string",
+      "description": "Application-defined message type name, used to describe the kind of message.",
+      "examples": [
+        "order.created",
+        "payment.processed",
+        "user.registered"
+      ]
+    },
+    "userId": {
+      "type": "string",
+      "description": "The user ID of the authenticated user who published the message. Validated by the broker against the connection credentials."
+    },
+    "appId": {
+      "type": "string",
+      "description": "Application identifier of the publishing application."
+    },
+    "clusterId": {
+      "type": "string",
+      "description": "Cluster identifier for use by clustering applications. Deprecated in AMQP 0-9-1."
+    }
+  },
+  "additionalProperties": false
+}

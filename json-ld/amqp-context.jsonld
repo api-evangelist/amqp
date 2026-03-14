@@ -1,0 +1,206 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "amqp": "https://www.amqp.org/specification/1.0#",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "Message": {
+      "@id": "amqp:Message",
+      "@context": {
+        "body": {
+          "@id": "amqp:body",
+          "rdfs:comment": "The payload content of the AMQP message"
+        },
+        "messageId": {
+          "@id": "amqp:message-id",
+          "@type": "xsd:string",
+          "rdfs:comment": "Unique identifier for the message"
+        },
+        "correlationId": {
+          "@id": "amqp:correlation-id",
+          "@type": "xsd:string",
+          "rdfs:comment": "Identifier used to correlate request and reply messages"
+        },
+        "contentType": {
+          "@id": "amqp:content-type",
+          "@type": "xsd:string",
+          "schema:sameAs": "dcterms:format"
+        },
+        "contentEncoding": {
+          "@id": "amqp:content-encoding",
+          "@type": "xsd:string"
+        },
+        "replyTo": {
+          "@id": "amqp:reply-to",
+          "@type": "xsd:string",
+          "rdfs:comment": "Address for reply messages in the request/reply pattern"
+        },
+        "timestamp": {
+          "@id": "amqp:creation-time",
+          "@type": "xsd:dateTime",
+          "schema:sameAs": "dcterms:created"
+        },
+        "expiration": {
+          "@id": "amqp:absolute-expiry-time",
+          "@type": "xsd:string"
+        },
+        "priority": {
+          "@id": "amqp:priority",
+          "@type": "xsd:integer"
+        },
+        "deliveryMode": {
+          "@id": "amqp:durable",
+          "@type": "xsd:integer",
+          "rdfs:comment": "1 = non-persistent, 2 = persistent"
+        },
+        "userId": {
+          "@id": "amqp:user-id",
+          "@type": "xsd:string",
+          "schema:sameAs": "schema:identifier"
+        },
+        "appId": {
+          "@id": "amqp:group-id",
+          "@type": "xsd:string"
+        },
+        "type": {
+          "@id": "amqp:subject",
+          "@type": "xsd:string",
+          "schema:sameAs": "dcterms:type"
+        }
+      }
+    },
+
+    "Exchange": {
+      "@id": "amqp:Exchange",
+      "@context": {
+        "name": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "exchangeType": {
+          "@id": "amqp:exchange-type",
+          "@type": "xsd:string",
+          "rdfs:comment": "One of: direct, topic, fanout, headers"
+        },
+        "durable": {
+          "@id": "amqp:durable",
+          "@type": "xsd:boolean"
+        },
+        "autoDelete": {
+          "@id": "amqp:auto-delete",
+          "@type": "xsd:boolean"
+        },
+        "internal": {
+          "@id": "amqp:internal",
+          "@type": "xsd:boolean"
+        }
+      }
+    },
+
+    "Queue": {
+      "@id": "amqp:Queue",
+      "@context": {
+        "name": {
+          "@id": "schema:name",
+          "@type": "xsd:string"
+        },
+        "durable": {
+          "@id": "amqp:durable",
+          "@type": "xsd:boolean"
+        },
+        "exclusive": {
+          "@id": "amqp:exclusive",
+          "@type": "xsd:boolean"
+        },
+        "autoDelete": {
+          "@id": "amqp:auto-delete",
+          "@type": "xsd:boolean"
+        },
+        "messageCount": {
+          "@id": "amqp:message-count",
+          "@type": "xsd:integer"
+        },
+        "consumerCount": {
+          "@id": "amqp:consumer-count",
+          "@type": "xsd:integer"
+        }
+      }
+    },
+
+    "Binding": {
+      "@id": "amqp:Binding",
+      "@context": {
+        "source": {
+          "@id": "amqp:source",
+          "@type": "@id",
+          "rdfs:comment": "The exchange from which messages are routed"
+        },
+        "destination": {
+          "@id": "amqp:destination",
+          "@type": "@id",
+          "rdfs:comment": "The queue or exchange receiving routed messages"
+        },
+        "routingKey": {
+          "@id": "amqp:routing-key",
+          "@type": "xsd:string"
+        }
+      }
+    },
+
+    "Connection": {
+      "@id": "amqp:Connection",
+      "schema:sameAs": "schema:WebSocket",
+      "@context": {
+        "host": {
+          "@id": "schema:url",
+          "@type": "xsd:string"
+        },
+        "port": {
+          "@id": "amqp:port",
+          "@type": "xsd:integer"
+        },
+        "virtualHost": {
+          "@id": "amqp:virtual-host",
+          "@type": "xsd:string"
+        }
+      }
+    },
+
+    "Channel": {
+      "@id": "amqp:Channel",
+      "@context": {
+        "channelNumber": {
+          "@id": "amqp:channel-number",
+          "@type": "xsd:integer"
+        },
+        "prefetchCount": {
+          "@id": "amqp:prefetch-count",
+          "@type": "xsd:integer",
+          "rdfs:comment": "Maximum number of unacknowledged messages the consumer will receive"
+        }
+      }
+    },
+
+    "PublishSubscribe": {
+      "@id": "amqp:PublishSubscribe",
+      "rdfs:subClassOf": "schema:Action",
+      "rdfs:comment": "The publish/subscribe messaging pattern where messages are broadcast to all subscribers via a fanout or topic exchange"
+    },
+
+    "PointToPoint": {
+      "@id": "amqp:PointToPoint",
+      "rdfs:subClassOf": "schema:Action",
+      "rdfs:comment": "The point-to-point messaging pattern where each message is consumed by exactly one consumer from a queue"
+    },
+
+    "RequestReply": {
+      "@id": "amqp:RequestReply",
+      "rdfs:subClassOf": "schema:Action",
+      "rdfs:comment": "The request/reply messaging pattern using correlation IDs and reply-to queues for synchronous-style communication over asynchronous transport"
+    }
+  }
+}

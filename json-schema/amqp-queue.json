@@ -1,0 +1,99 @@
+{
+  "$id": "amqp-queue.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AMQP Queue",
+  "description": "Schema describing an AMQP 0-9-1 queue. Queues store messages and deliver them to consumers. They can be durable, exclusive, or auto-deleted, and support various arguments for controlling message TTL, length limits, and dead-lettering.",
+  "type": "object",
+  "required": [
+    "name"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the queue. An empty string causes the broker to generate a unique name."
+    },
+    "durable": {
+      "type": "boolean",
+      "description": "If true, the queue survives broker restarts.",
+      "default": false
+    },
+    "exclusive": {
+      "type": "boolean",
+      "description": "If true, the queue is used by only one connection and will be deleted when that connection closes.",
+      "default": false
+    },
+    "autoDelete": {
+      "type": "boolean",
+      "description": "If true, the queue is automatically deleted when the last consumer unsubscribes.",
+      "default": false
+    },
+    "arguments": {
+      "type": "object",
+      "description": "Optional arguments for queue declaration providing extended configuration.",
+      "properties": {
+        "x-message-ttl": {
+          "type": "integer",
+          "description": "Per-queue message time-to-live in milliseconds. Messages older than this are discarded or dead-lettered.",
+          "minimum": 0
+        },
+        "x-expires": {
+          "type": "integer",
+          "description": "Queue expiry time in milliseconds. The queue is deleted after being unused for this duration.",
+          "minimum": 0
+        },
+        "x-max-length": {
+          "type": "integer",
+          "description": "Maximum number of messages the queue can hold. Overflow behavior is controlled by x-overflow.",
+          "minimum": 0
+        },
+        "x-max-length-bytes": {
+          "type": "integer",
+          "description": "Maximum total size in bytes of all messages in the queue.",
+          "minimum": 0
+        },
+        "x-overflow": {
+          "type": "string",
+          "description": "Overflow behavior when x-max-length or x-max-length-bytes is reached.",
+          "enum": [
+            "drop-head",
+            "reject-publish",
+            "reject-publish-dlx"
+          ]
+        },
+        "x-dead-letter-exchange": {
+          "type": "string",
+          "description": "Name of the exchange to which dead-lettered messages are republished."
+        },
+        "x-dead-letter-routing-key": {
+          "type": "string",
+          "description": "Routing key to use when dead-lettering messages. If not set, the original routing key is used."
+        },
+        "x-max-priority": {
+          "type": "integer",
+          "description": "Maximum priority level the queue supports (0-255). Enables priority queuing.",
+          "minimum": 0,
+          "maximum": 255
+        },
+        "x-queue-mode": {
+          "type": "string",
+          "description": "Queue mode. 'lazy' mode moves messages to disk as early as possible to reduce memory usage.",
+          "enum": [
+            "default",
+            "lazy"
+          ]
+        },
+        "x-queue-type": {
+          "type": "string",
+          "description": "The queue type. Classic queues are the default; quorum queues provide data safety via replication.",
+          "enum": [
+            "classic",
+            "quorum",
+            "stream"
+          ]
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false
+}

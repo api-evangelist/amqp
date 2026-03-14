@@ -1,0 +1,397 @@
+asyncapi: 3.0.0
+info:
+  title: AMQP Messaging API
+  version: 1.0.0
+  description: >-
+    AsyncAPI specification for AMQP (Advanced Message Queuing Protocol)
+    messaging patterns including publish/subscribe, request/reply, and
+    point-to-point messaging. AMQP 0-9-1 defines exchanges, queues, and
+    bindings as the core building blocks for flexible message routing.
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+
+servers:
+  production:
+    host: amqp.example.com:5672
+    protocol: amqp
+    protocolVersion: 0.9.1
+    description: Production AMQP broker
+    security:
+      - type: userPassword
+    tags:
+      - name: production
+
+channels:
+  orderCreated:
+    address: orders.created
+    description: >-
+      Publish/subscribe channel for order creation events. Messages are
+      published to a topic exchange and routed to all bound queues.
+    messages:
+      orderCreatedMessage:
+        $ref: '#/components/messages/OrderCreated'
+    bindings:
+      amqp:
+        is: routingKey
+        exchange:
+          name: orders
+          type: topic
+          durable: true
+          autoDelete: false
+        queue:
+          name: orders.created
+          durable: true
+          exclusive: false
+          autoDelete: false
+
+  orderProcessing:
+    address: orders.process
+    description: >-
+      Point-to-point channel for order processing. Messages are sent to a
+      direct exchange and consumed by a single worker from a shared queue.
+    messages:
+      orderProcessMessage:
+        $ref: '#/components/messages/OrderProcess'
+    bindings:
+      amqp:
+        is: routingKey
+        exchange:
+          name: orders.direct
+          type: direct
+          durable: true
+          autoDelete: false
+        queue:
+          name: orders.process.queue
+          durable: true
+          exclusive: false
+          autoDelete: false
+
+  orderStatusRequest:
+    address: orders.status.request
+    description: >-
+      Request channel for the request/reply pattern. Clients send requests
+      with a reply-to header and correlation ID for response matching.
+    messages:
+      orderStatusRequestMessage:
+        $ref: '#/components/messages/OrderStatusRequest'
+    bindings:
+      amqp:
+        is: routingKey
+        exchange:
+          name: orders.rpc
+          type: direct
+          durable: true
+          autoDelete: false
+        queue:
+          name: orders.status.request.queue
+          durable: true
+          exclusive: false
+          autoDelete: false
+
+  orderStatusReply:
+    address: orders.status.reply
+    description: >-
+      Reply channel for the request/reply pattern. The server publishes
+      responses to the client-specified reply-to queue with the matching
+      correlation ID.
+    messages:
+      orderStatusReplyMessage:
+        $ref: '#/components/messages/OrderStatusReply'
+    bindings:
+      amqp:
+        is: routingKey
+        exchange:
+          name: ''
+          type: direct
+          durable: true
+          autoDelete: false
+        queue:
+          name: amq.rabbitmq.reply-to
+          durable: false
+          exclusive: true
+          autoDelete: true
+
+  notifications:
+    address: notifications.#
+    description: >-
+      Fanout channel for broadcasting notifications to all subscribers.
+      Uses a fanout exchange to deliver messages to every bound queue
+      regardless of routing key.
+    messages:
+      notificationMessage:
+        $ref: '#/components/messages/Notification'
+    bindings:
+      amqp:
+        is: routingKey
+        exchange:
+          name: notifications.fanout
+          type: fanout
+          durable: true
+          autoDelete: false
+
+operations:
+  publishOrderCreated:
+    action: send
+    channel:
+      $ref: '#/channels/orderCreated'
+    summary: Publish an order created event
+    description: >-
+      Publishes an order created event to the topic exchange. All consumers
+      with matching routing key bindings will receive the message.
+    bindings:
+      amqp:
+        deliveryMode: 2
+        mandatory: true
+
+  consumeOrderCreated:
+    action: receive
+    channel:
+      $ref: '#/channels/orderCreated'
+    summary: Subscribe to order created events
+    description: >-
+      Subscribes to order created events from the topic exchange.
+
+  sendOrderForProcessing:
+    action: send
+    channel:
+      $ref: '#/channels/orderProcessing'
+    summary: Send an order for processing
+    description: >-
+      Sends an order to the processing queue. Only one consumer will
+      process each message (competing consumers pattern).
+    bindings:
+      amqp:
+        deliveryMode: 2
+        mandatory: true
+
+  processOrder:
+    action: receive
+    channel:
+      $ref: '#/channels/orderProcessing'
+    summary: Receive an order for processing
+    bindings:
+      amqp:
+        ack: true
+        prefetchCount: 1
+
+  requestOrderStatus:
+    action: send
+    channel:
+      $ref: '#/channels/orderStatusRequest'
+    summary: Request the status of an order
+    description: >-
+      Sends a request for order status using the request/reply pattern.
+      The reply-to queue and correlation ID are set in message properties.
+    bindings:
+      amqp:
+        deliveryMode: 2
+
+  receiveOrderStatusReply:
+    action: receive
+    channel:
+      $ref: '#/channels/orderStatusReply'
+    summary: Receive the order status reply
+
+  broadcastNotification:
+    action: send
+    channel:
+      $ref: '#/channels/notifications'
+    summary: Broadcast a notification to all subscribers
+    bindings:
+      amqp:
+        deliveryMode: 1
+
+components:
+  messages:
+    OrderCreated:
+      name: OrderCreated
+      title: Order Created Event
+      summary: Event published when a new order is created
+      contentType: application/json
+      traits:
+        - $ref: '#/components/messageTraits/commonHeaders'
+      payload:
+        type: object
+        required:
+          - orderId
+          - customerId
+          - createdAt
+        properties:
+          orderId:
+            type: string
+            format: uuid
+            description: Unique identifier for the order
+          customerId:
+            type: string
+            description: Identifier of the customer who placed the order
+          items:
+            type: array
+            items:
+              type: object
+              properties:
+                productId:
+                  type: string
+                quantity:
+                  type: integer
+                  minimum: 1
+                price:
+                  type: number
+                  format: double
+          totalAmount:
+            type: number
+            format: double
+          currency:
+            type: string
+            pattern: ^[A-Z]{3}$
+          createdAt:
+            type: string
+            format: date-time
+
+    OrderProcess:
+      name: OrderProcess
+      title: Order Processing Command
+      summary: Command to process an order
+      contentType: application/json
+      traits:
+        - $ref: '#/components/messageTraits/commonHeaders'
+      payload:
+        type: object
+        required:
+          - orderId
+          - action
+        properties:
+          orderId:
+            type: string
+            format: uuid
+          action:
+            type: string
+            enum:
+              - validate
+              - fulfill
+              - ship
+              - cancel
+          priority:
+            type: integer
+            minimum: 0
+            maximum: 9
+
+    OrderStatusRequest:
+      name: OrderStatusRequest
+      title: Order Status Request
+      summary: Request for the current status of an order
+      contentType: application/json
+      correlationId:
+        location: $message.header#/correlationId
+      traits:
+        - $ref: '#/components/messageTraits/commonHeaders'
+      payload:
+        type: object
+        required:
+          - orderId
+        properties:
+          orderId:
+            type: string
+            format: uuid
+
+    OrderStatusReply:
+      name: OrderStatusReply
+      title: Order Status Reply
+      summary: Reply containing the current status of an order
+      contentType: application/json
+      correlationId:
+        location: $message.header#/correlationId
+      payload:
+        type: object
+        required:
+          - orderId
+          - status
+        properties:
+          orderId:
+            type: string
+            format: uuid
+          status:
+            type: string
+            enum:
+              - pending
+              - processing
+              - shipped
+              - delivered
+              - cancelled
+          updatedAt:
+            type: string
+            format: date-time
+          estimatedDelivery:
+            type: string
+            format: date-time
+
+    Notification:
+      name: Notification
+      title: Notification Message
+      summary: A notification broadcast to all subscribers
+      contentType: application/json
+      traits:
+        - $ref: '#/components/messageTraits/commonHeaders'
+      payload:
+        type: object
+        required:
+          - type
+          - message
+          - timestamp
+        properties:
+          type:
+            type: string
+            enum:
+              - info
+              - warning
+              - error
+              - alert
+          message:
+            type: string
+          timestamp:
+            type: string
+            format: date-time
+          metadata:
+            type: object
+            additionalProperties: true
+
+  messageTraits:
+    commonHeaders:
+      headers:
+        type: object
+        properties:
+          correlationId:
+            type: string
+            format: uuid
+            description: Unique identifier for correlating request/reply messages
+          messageId:
+            type: string
+            format: uuid
+            description: Unique identifier for the message
+          timestamp:
+            type: string
+            format: date-time
+            description: Timestamp when the message was created
+          contentType:
+            type: string
+            description: MIME type of the message body
+          replyTo:
+            type: string
+            description: Queue name for reply messages in request/reply pattern
+          expiration:
+            type: string
+            description: Message TTL in milliseconds
+          priority:
+            type: integer
+            minimum: 0
+            maximum: 9
+            description: Message priority (0-9)
+          deliveryMode:
+            type: integer
+            enum:
+              - 1
+              - 2
+            description: 1 for non-persistent, 2 for persistent delivery
+          appId:
+            type: string
+            description: Identifier of the application that produced the message
