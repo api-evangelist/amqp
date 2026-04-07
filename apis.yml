@@ -1,62 +1,50 @@
 name: AMQP
-description: AMQP (Advanced Message Queuing Protocol) is an open standard application-layer
-  protocol for message-oriented middleware supporting reliable queuing, routing, and
-  publish/subscribe messaging patterns. It enables interoperable, asynchronous communication
-  between applications and services across different platforms and languages.
+description: AMQP (Advanced Message Queuing Protocol) is an open standard application-layer protocol for message-oriented middleware supporting reliable queuing, routing, and publish/subscribe messaging patterns. It enables interoperable, asynchronous communication between applications and services across different platforms and languages.
 url: https://www.amqp.org/
 tags:
-- AMQP
-- Messaging
-- Message Queue
-- Middleware
-- Publish Subscribe
-- Asynchronous
+  - AMQP
+  - Asynchronous
+  - Message Queue
+  - Messaging
+  - Middleware
+  - Publish Subscribe
 created: '2025'
 modified: '2025'
 apis:
-- name: AMQP Messaging API
-  description: AsyncAPI specification for AMQP messaging patterns including
-    publish/subscribe, request/reply, and point-to-point messaging via exchanges,
-    queues, and bindings.
-  properties:
-  - type: x-asyncapi
-    url: asyncapi/amqp-messaging.yml
-  tags:
-  - AMQP
-  - AsyncAPI
-  - Messaging
-  - Publish Subscribe
-  - Request Reply
-  - Point to Point
+  - name: AMQP Messaging API
+    description: AsyncAPI specification for AMQP messaging patterns including publish/subscribe, request/reply, and point-to-point messaging via exchanges, queues, and bindings.
+    properties:
+      - type: x-asyncapi
+        url: asyncapi/amqp-messaging.yml
+    tags:
+      - AMQP
+      - AsyncAPI
+      - Messaging
+      - Point to Point
+      - Publish Subscribe
+      - Request Reply
 common:
-- type: x-json-schema
-  title: AMQP Message
-  url: json-schema/amqp-message.json
-  description: JSON Schema describing the structure of an AMQP message including
-    properties, headers, and payload body.
-- type: x-json-schema
-  title: AMQP Message Properties
-  url: json-schema/amqp-message-properties.json
-  description: JSON Schema describing the standard AMQP 0-9-1 Basic.Properties
-    including content type, delivery mode, correlation ID, and reply-to.
-- type: x-json-schema
-  title: AMQP Exchange
-  url: json-schema/amqp-exchange.json
-  description: JSON Schema describing an AMQP exchange with type, durability,
-    auto-delete, and argument configuration.
-- type: x-json-schema
-  title: AMQP Queue
-  url: json-schema/amqp-queue.json
-  description: JSON Schema describing an AMQP queue with support for TTL,
-    dead-lettering, priority, and overflow policies.
-- type: x-json-schema
-  title: AMQP Binding
-  url: json-schema/amqp-binding.json
-  description: JSON Schema describing an AMQP binding that links exchanges
-    to queues or other exchanges using routing keys.
-- type: x-json-ld-context
-  title: AMQP JSON-LD Context
-  url: json-ld/amqp-context.jsonld
-  description: JSON-LD context mapping AMQP concepts (messages, exchanges,
-    queues, bindings, channels) to linked data vocabularies including Schema.org
-    and Dublin Core.
+  - type: x-json-schema
+    title: AMQP Message
+    url: json-schema/amqp-message.json
+    description: JSON Schema describing the structure of an AMQP message including properties, headers, and payload body.
+  - type: x-json-schema
+    title: AMQP Message Properties
+    url: json-schema/amqp-message-properties.json
+    description: JSON Schema describing the standard AMQP 0-9-1 Basic.Properties including content type, delivery mode, correlation ID, and reply-to.
+  - type: x-json-schema
+    title: AMQP Exchange
+    url: json-schema/amqp-exchange.json
+    description: JSON Schema describing an AMQP exchange with type, durability, auto-delete, and argument configuration.
+  - type: x-json-schema
+    title: AMQP Queue
+    url: json-schema/amqp-queue.json
+    description: JSON Schema describing an AMQP queue with support for TTL, dead-lettering, priority, and overflow policies.
+  - type: x-json-schema
+    title: AMQP Binding
+    url: json-schema/amqp-binding.json
+    description: JSON Schema describing an AMQP binding that links exchanges to queues or other exchanges using routing keys.
+  - type: x-json-ld-context
+    title: AMQP JSON-LD Context
+    url: json-ld/amqp-context.jsonld
+    description: JSON-LD context mapping AMQP concepts (messages, exchanges, queues, bindings, channels) to linked data vocabularies including Schema.org and Dublin Core.
