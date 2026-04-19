@@ -1,0 +1,30 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "amqp": "https://www.amqp.org/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "AMQP Queue": "amqp:AMQP Queue",
+    "name": {
+      "@id": "amqp:name",
+      "@type": "xsd:string"
+    },
+    "durable": {
+      "@id": "amqp:durable",
+      "@type": "xsd:boolean"
+    },
+    "exclusive": {
+      "@id": "amqp:exclusive",
+      "@type": "xsd:boolean"
+    },
+    "autoDelete": {
+      "@id": "amqp:autoDelete",
+      "@type": "xsd:boolean"
+    },
+    "arguments": {
+      "@id": "amqp:arguments",
+      "@type": "@id"
+    }
+  }
+}

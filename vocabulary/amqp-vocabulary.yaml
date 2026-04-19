@@ -1,0 +1,83 @@
+vocabulary: 1.0.0
+info:
+  provider: AMQP
+  description: Normative vocabulary for AMQP messaging concepts covering exchanges, queues, bindings, messages, and routing patterns.
+  created: '2026-04-19'
+  modified: '2026-04-19'
+operational:
+  specification:
+    name: AMQP
+    currentVersion: '1.0'
+    legacyVersions:
+    - 0-9-1
+    - 0-10
+    standard: ISO/IEC 19464
+    governance: OASIS
+  channels:
+  - name: orderCreated
+    description: 'Publish/subscribe channel for order creation events. Messages are published to a topic exchange and '
+  - name: orderProcessing
+    description: 'Point-to-point channel for order processing. Messages are sent to a direct exchange and consumed by '
+  - name: orderStatusRequest
+    description: Request channel for the request/reply pattern. Clients send requests with a reply-to header and corr
+  - name: orderStatusReply
+    description: 'Reply channel for the request/reply pattern. The server publishes responses to the client-specified '
+  - name: notifications
+    description: 'Fanout channel for broadcasting notifications to all subscribers. Uses a fanout exchange to deliver '
+  messages:
+  - name: OrderCreated
+  - name: OrderProcess
+  - name: OrderStatusRequest
+  - name: OrderStatusReply
+  - name: Notification
+  schemas: []
+  concepts:
+  - term: Exchange
+    definition: Routing entity that receives messages from publishers and routes them to queues based on routing rules.
+  - term: Queue
+    definition: Buffer that stores messages until they are consumed by a subscriber.
+  - term: Binding
+    definition: Rule linking an exchange to a queue with an optional routing key.
+  - term: Routing Key
+    definition: Message attribute used by exchanges to determine which queues receive a message.
+  - term: Acknowledgment
+    definition: Confirmation signal sent by consumer to broker indicating successful message processing.
+  - term: Channel
+    definition: Virtual connection within an AMQP connection for multiplexing message streams.
+  - term: Virtual Host
+    definition: Logical grouping of resources within a broker providing namespace isolation.
+  - term: Dead Letter Exchange
+    definition: Exchange that receives messages that cannot be delivered to any queue.
+  - term: Publisher
+    definition: Application that sends messages to exchanges.
+  - term: Consumer
+    definition: Application that receives messages from queues.
+  exchangeTypes:
+  - name: direct
+    description: Routes messages to queues whose binding key exactly matches the routing key.
+  - name: fanout
+    description: Routes messages to all bound queues regardless of routing key.
+  - name: topic
+    description: Routes messages to queues based on wildcard pattern matching of routing keys.
+  - name: headers
+    description: Routes messages based on message header attributes instead of routing key.
+implementations:
+- name: RabbitMQ
+  protocol: AMQP 0-9-1
+  url: https://www.rabbitmq.com
+- name: Apache ActiveMQ
+  protocol: AMQP 1.0
+  url: https://activemq.apache.org
+- name: Apache Qpid
+  protocol: AMQP 1.0
+  url: https://qpid.apache.org
+- name: Azure Service Bus
+  protocol: AMQP 1.0
+  url: https://azure.microsoft.com/en-us/products/service-bus
+- name: Red Hat AMQ
+  protocol: AMQP 1.0
+  url: https://www.redhat.com/en/technologies/jboss-middleware/amq
+- name: rhea
+  protocol: AMQP 1.0
+  url: https://github.com/amqp/rhea
+  language: JavaScript

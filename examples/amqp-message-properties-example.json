@@ -1,0 +1,16 @@
+{
+  "contentType": "topic",
+  "contentEncoding": "application/json",
+  "headers": {},
+  "deliveryMode": 1,
+  "priority": 37,
+  "correlationId": "500123",
+  "replyTo": "example_value",
+  "expiration": "example_value",
+  "messageId": "500123",
+  "timestamp": 628,
+  "type": "topic",
+  "userId": "500123",
+  "appId": "500123",
+  "clusterId": "500123"
+}

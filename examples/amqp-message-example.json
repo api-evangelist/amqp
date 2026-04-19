@@ -1,0 +1,9 @@
+{
+  "properties": "example_value",
+  "headers": {},
+  "body": "example_value",
+  "exchange": "example_value",
+  "routingKey": "orders.created",
+  "mandatory": true,
+  "immediate": false
+}

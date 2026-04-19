@@ -1,0 +1,10 @@
+{
+  "name": "example-",
+  "type": "direct",
+  "durable": true,
+  "autoDelete": true,
+  "internal": false,
+  "arguments": {
+    "alternate-exchange": "example_value"
+  }
+}

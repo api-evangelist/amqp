@@ -1,0 +1,72 @@
+rules:
+  # INFO / METADATA
+  asyncapi-info-description:
+    description: AsyncAPI info must have a description
+    severity: error
+    given: "$.info"
+    then:
+      field: description
+      function: truthy
+
+  asyncapi-info-version:
+    description: AsyncAPI info must have a version
+    severity: error
+    given: "$.info"
+    then:
+      field: version
+      function: truthy
+
+  asyncapi-servers-defined:
+    description: At least one server must be defined
+    severity: warn
+    given: "$"
+    then:
+      field: servers
+      function: truthy
+
+  asyncapi-channel-description:
+    description: Every channel should have a description
+    severity: warn
+    given: "$.channels[*]"
+    then:
+      field: description
+      function: truthy
+
+  asyncapi-message-description:
+    description: Every message should have a description
+    severity: warn
+    given: "$.components.messages[*]"
+    then:
+      field: description
+      function: truthy
+
+  asyncapi-schema-type:
+    description: Schema properties should have explicit types
+    severity: info
+    given: "$.components.schemas[*].properties[*]"
+    then:
+      field: type
+      function: truthy
+
+  asyncapi-amqp-exchange-type:
+    description: AMQP bindings should define exchange type
+    severity: info
+    given: "$.channels[*].bindings.amqp.exchange"
+    then:
+      field: type
+      function: truthy
+
+  asyncapi-operation-id:
+    description: Operations should have an operationId
+    severity: warn
+    given: "$.channels[*].messages[*]"
+    then:
+      field: name
+      function: truthy
+
+  asyncapi-no-empty-description:
+    description: Descriptions must not be empty
+    severity: warn
+    given: "$..description"
+    then:
+      function: truthy

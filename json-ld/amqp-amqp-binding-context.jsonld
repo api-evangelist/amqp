@@ -1,0 +1,30 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "amqp": "https://www.amqp.org/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "AMQP Binding": "amqp:AMQP Binding",
+    "source": {
+      "@id": "amqp:source",
+      "@type": "xsd:string"
+    },
+    "destination": {
+      "@id": "amqp:destination",
+      "@type": "xsd:string"
+    },
+    "destinationType": {
+      "@id": "amqp:destinationType",
+      "@type": "xsd:string"
+    },
+    "routingKey": {
+      "@id": "amqp:routingKey",
+      "@type": "xsd:string"
+    },
+    "arguments": {
+      "@id": "amqp:arguments",
+      "@type": "@id"
+    }
+  }
+}

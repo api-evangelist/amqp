@@ -1,0 +1,18 @@
+{
+  "name": "example-",
+  "durable": false,
+  "exclusive": false,
+  "autoDelete": false,
+  "arguments": {
+    "x-message-ttl": 538,
+    "x-expires": 149,
+    "x-max-length": 533,
+    "x-max-length-bytes": 633,
+    "x-overflow": "drop-head",
+    "x-dead-letter-exchange": "example_value",
+    "x-dead-letter-routing-key": "orders.created",
+    "x-max-priority": 311,
+    "x-queue-mode": "default",
+    "x-queue-type": "classic"
+  }
+}

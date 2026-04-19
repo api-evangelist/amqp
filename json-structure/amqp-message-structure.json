@@ -1,0 +1,63 @@
+{
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amqp/refs/heads/main/json-structure/amqp-message-structure.json",
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "name": "AMQP Message",
+  "description": "Schema describing the structure of an AMQP 0-9-1 message including properties, headers, and payload. An AMQP message consists of message properties (metadata), application headers, and a binary payload body.",
+  "type": "object",
+  "required": [
+    "body"
+  ],
+  "properties": {
+    "properties": {
+      "$ref": "amqp-message-properties.json"
+    },
+    "headers": {
+      "type": "object",
+      "description": "Application-specific headers as key-value pairs sent in the message header frame.",
+      "additionalProperties": true
+    },
+    "body": {
+      "description": "The message body content. Can be any valid JSON value or a binary payload represented as a base64-encoded string.",
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": true
+        },
+        {
+          "type": "array"
+        },
+        {
+          "type": "string"
+        },
+        {
+          "type": "double"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "exchange": {
+      "type": "string",
+      "description": "The exchange the message was published to."
+    },
+    "routingKey": {
+      "type": "string",
+      "description": "The routing key used when publishing the message."
+    },
+    "mandatory": {
+      "type": "boolean",
+      "description": "If true, the server will return an undeliverable message with a Return method. If false, the server silently drops the message.",
+      "default": false
+    },
+    "immediate": {
+      "type": "boolean",
+      "description": "If true, the server will return an undeliverable message if it cannot be immediately consumed. Deprecated in AMQP 0-9-1.",
+      "default": false
+    }
+  },
+  "additionalProperties": false
+}

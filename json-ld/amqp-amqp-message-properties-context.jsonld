@@ -1,0 +1,66 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "amqp": "https://www.amqp.org/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "AMQP Message Properties": "amqp:AMQP Message Properties",
+    "contentType": {
+      "@id": "amqp:contentType",
+      "@type": "xsd:string"
+    },
+    "contentEncoding": {
+      "@id": "amqp:contentEncoding",
+      "@type": "xsd:string"
+    },
+    "headers": {
+      "@id": "amqp:headers",
+      "@type": "@id"
+    },
+    "deliveryMode": {
+      "@id": "amqp:deliveryMode",
+      "@type": "xsd:integer"
+    },
+    "priority": {
+      "@id": "amqp:priority",
+      "@type": "xsd:integer"
+    },
+    "correlationId": {
+      "@id": "amqp:correlationId",
+      "@type": "xsd:string"
+    },
+    "replyTo": {
+      "@id": "amqp:replyTo",
+      "@type": "xsd:string"
+    },
+    "expiration": {
+      "@id": "amqp:expiration",
+      "@type": "xsd:string"
+    },
+    "messageId": {
+      "@id": "amqp:messageId",
+      "@type": "xsd:string"
+    },
+    "timestamp": {
+      "@id": "amqp:timestamp",
+      "@type": "xsd:integer"
+    },
+    "type": {
+      "@id": "amqp:type",
+      "@type": "xsd:string"
+    },
+    "userId": {
+      "@id": "amqp:userId",
+      "@type": "xsd:string"
+    },
+    "appId": {
+      "@id": "amqp:appId",
+      "@type": "xsd:string"
+    },
+    "clusterId": {
+      "@id": "amqp:clusterId",
+      "@type": "xsd:string"
+    }
+  }
+}

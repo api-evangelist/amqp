@@ -1,0 +1,9 @@
+{
+  "source": "example_value",
+  "destination": "example_value",
+  "destinationType": "queue",
+  "routingKey": "orders.created",
+  "arguments": {
+    "x-match": "all"
+  }
+}

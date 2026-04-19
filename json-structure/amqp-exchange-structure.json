@@ -1,0 +1,54 @@
+{
+  "$id": "https://raw.githubusercontent.com/api-evangelist/amqp/refs/heads/main/json-structure/amqp-exchange-structure.json",
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "name": "AMQP Exchange",
+  "description": "Schema describing an AMQP 0-9-1 exchange. Exchanges receive messages from producers and route them to queues based on the exchange type and binding rules. The four standard exchange types are direct, topic, fanout, and headers.",
+  "type": "object",
+  "required": [
+    "name",
+    "type"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the exchange. The empty string denotes the default (nameless) direct exchange."
+    },
+    "type": {
+      "type": "string",
+      "description": "The exchange type which determines the routing algorithm.",
+      "enum": [
+        "direct",
+        "topic",
+        "fanout",
+        "headers"
+      ]
+    },
+    "durable": {
+      "type": "boolean",
+      "description": "If true, the exchange survives broker restarts. Non-durable exchanges are deleted on restart.",
+      "default": false
+    },
+    "autoDelete": {
+      "type": "boolean",
+      "description": "If true, the exchange is automatically deleted when the last queue is unbound from it.",
+      "default": false
+    },
+    "internal": {
+      "type": "boolean",
+      "description": "If true, the exchange cannot be directly published to by clients; it can only receive messages from other exchanges via exchange-to-exchange bindings.",
+      "default": false
+    },
+    "arguments": {
+      "type": "object",
+      "description": "Optional arguments for exchange declaration, used for broker-specific extensions (e.g., alternate exchange).",
+      "properties": {
+        "alternate-exchange": {
+          "type": "string",
+          "description": "Name of an alternate exchange to route messages to when they cannot be routed by this exchange."
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false
+}

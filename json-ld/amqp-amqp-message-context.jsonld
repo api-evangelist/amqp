@@ -1,0 +1,38 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "amqp": "https://www.amqp.org/schema/",
+    "schema": "https://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "AMQP Message": "amqp:AMQP Message",
+    "properties": {
+      "@id": "amqp:properties",
+      "@type": "xsd:string"
+    },
+    "headers": {
+      "@id": "amqp:headers",
+      "@type": "@id"
+    },
+    "body": {
+      "@id": "amqp:body",
+      "@type": "xsd:string"
+    },
+    "exchange": {
+      "@id": "amqp:exchange",
+      "@type": "xsd:string"
+    },
+    "routingKey": {
+      "@id": "amqp:routingKey",
+      "@type": "xsd:string"
+    },
+    "mandatory": {
+      "@id": "amqp:mandatory",
+      "@type": "xsd:boolean"
+    },
+    "immediate": {
+      "@id": "amqp:immediate",
+      "@type": "xsd:boolean"
+    }
+  }
+}
