@@ -28,6 +28,8 @@ apis:
   - Request Reply
   humanURL: https://www.amqp.org/
 common:
+- type: DomainSecurity
+  url: security/amqp-domain-security.yml
 - type: JSONSchema
   title: AMQP Message
   url: json-schema/amqp-message.json
