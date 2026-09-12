@@ -53,6 +53,8 @@ apis:
   - Request Reply
   humanURL: https://www.amqp.org/
 common:
+- type: Website
+  url: https://www.amqp.org/
 - type: DomainSecurity
   url: security/amqp-domain-security.yml
 - type: JSONSchema
