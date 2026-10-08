@@ -54,6 +54,12 @@ apis:
   - Request Reply
   humanURL: https://www.amqp.org/
 common:
+- type: Plans
+  url: plans/amqp-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/amqp-rate-limits.yml
+- type: FinOps
+  url: finops/amqp-finops.yml
 - type: Website
   url: https://www.amqp.org/
 - type: DomainSecurity
