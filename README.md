@@ -1,4 +1,4 @@
-# AMQP (amqp)
+# AMQP
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,138 +66,174 @@
 
 AMQP (Advanced Message Queuing Protocol) is an open standard for message-oriented middleware governed by OASIS and standardized as ISO/IEC 19464. AMQP 1.0 enables interoperable, asynchronous communication between applications across different platforms and vendors. It defines a wire-level protocol supporting reliable queuing, flexible routing, publish/subscribe, and request/reply messaging patterns. Major implementations include Apache ActiveMQ/Artemis, RabbitMQ, Azure Service Bus, Red Hat AMQ, and Apache Qpid.
 
-**URL:** [Visit APIs.json URL](https://www.amqp.org/)
+**Areas:** AMQP · Asynchronous · Message Queue · Messaging · Middleware · Open Standard · Publish Subscribe · Real-Time
 
-**Run:** [Capabilities Using Naftiko](https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=company-api-evangelist&utm_content=repo)
+## AMQP on APIs.io
 
-## Tags:
+Everything profiled for AMQP is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/amqp/](https://apis.io/providers/amqp/)** — or go straight to one of the APIs or properties below.
 
- - AMQP, Asynchronous, Message Queue, Messaging, Middleware, Open Standard, Publish Subscribe
+### APIs (1)
 
-## Timestamps
+- [AMQP Messaging API](https://apis.io/apis/amqp/amqp-messaging-api/) — AsyncAPI specification for AMQP messaging patterns including publish/subscribe, request/reply, and point-to-point messaging via exchanges, queues, and bindings.
 
-- **Created:** 2025
-- **Modified:** 2026-04-19
+### Published properties
 
-## APIs
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-### AMQP Messaging API
-AsyncAPI specification for AMQP messaging patterns including publish/subscribe, request/reply, and point-to-point messaging via exchanges, queues, and bindings.
+#### AsyncAPI (1)
 
-**Human URL:** [https://www.amqp.org/](https://www.amqp.org/)
+Event-driven and webhook contracts.
 
-#### Tags:
+- [AMQP Messaging API](https://apis.io/asyncapis/amqp/amqp-messaging/)
 
- - AMQP, AsyncAPI, Messaging, Point to Point, Publish Subscribe, Request Reply
+#### Event channels (5)
 
-#### Properties
+Individual events and webhooks the provider emits.
 
-- [AsyncAPI](asyncapi/amqp-messaging.yml)
+- [notifications.#](https://apis.io/channels/amqp/notifications/)
+- [orders.created](https://apis.io/channels/amqp/orders-created/)
+- [orders.process](https://apis.io/channels/amqp/orders-process/)
+- [orders.status.reply](https://apis.io/channels/amqp/orders-status-reply/)
+- [orders.status.request](https://apis.io/channels/amqp/orders-status-request/)
 
-## Common Properties
+#### JSON Schema (5)
 
-- [JSONSchema](json-schema/amqp-message.json)
-- [JSONSchema](json-schema/amqp-message-properties.json)
-- [JSONSchema](json-schema/amqp-exchange.json)
-- [JSONSchema](json-schema/amqp-queue.json)
-- [JSONSchema](json-schema/amqp-binding.json)
-- [JSONLD](json-ld/amqp-context.jsonld)
-- [Portal](https://www.amqp.org/)
+The data models the API reads and writes.
+
+- [AMQP Binding](https://apis.io/schemas/amqp/amqp-binding/)
+- [AMQP Exchange](https://apis.io/schemas/amqp/amqp-exchange/)
+- [AMQP Message](https://apis.io/schemas/amqp/amqp-message/)
+- [AMQP Message Properties](https://apis.io/schemas/amqp/amqp-message-properties/)
+- [AMQP Queue](https://apis.io/schemas/amqp/amqp-queue/)
+
+#### JSON Structure (5)
+
+Data models expressed in JSON Structure.
+
+- [Amqp Binding Structure](https://apis.io/json-structure/amqp/amqp-binding-structure/)
+- [Amqp Exchange Structure](https://apis.io/json-structure/amqp/amqp-exchange-structure/)
+- [Amqp Message Properties Structure](https://apis.io/json-structure/amqp/amqp-message-properties-structure/)
+- [Amqp Message Structure](https://apis.io/json-structure/amqp/amqp-message-structure/)
+- [Amqp Queue Structure](https://apis.io/json-structure/amqp/amqp-queue-structure/)
+
+#### JSON-LD (6)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Amqp Amqp Binding Context](https://apis.io/jsonld/amqp/amqp-amqp-binding-context/)
+- [Amqp Amqp Exchange Context](https://apis.io/jsonld/amqp/amqp-amqp-exchange-context/)
+- [Amqp Amqp Message Context](https://apis.io/jsonld/amqp/amqp-amqp-message-context/)
+- [Amqp Amqp Message Properties Context](https://apis.io/jsonld/amqp/amqp-amqp-message-properties-context/)
+- [Amqp Amqp Queue Context](https://apis.io/jsonld/amqp/amqp-amqp-queue-context/)
+- [Amqp Context](https://apis.io/jsonld/amqp/amqp-context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [Amqp Vocabulary](https://apis.io/vocabularies/amqp/amqp-vocabulary/)
+
+#### Examples (5)
+
+Example requests and responses.
+
+- [Amqp Binding Example](https://apis.io/examples/amqp/amqp-binding-example/)
+- [Amqp Exchange Example](https://apis.io/examples/amqp/amqp-exchange-example/)
+- [Amqp Message Example](https://apis.io/examples/amqp/amqp-message-example/)
+- [Amqp Message Properties Example](https://apis.io/examples/amqp/amqp-message-properties-example/)
+- [Amqp Queue Example](https://apis.io/examples/amqp/amqp-queue-example/)
+
+#### Governance rules (3)
+
+Spectral rulesets for the provider's contracts.
+
+- [AMQP — asyncapi rules](https://apis.io/rules/amqp/amqp-asyncapi-spectral-rules/)
+- [AMQP — jsonschema rules](https://apis.io/rules/amqp/amqp-jsonschema-spectral-rules/)
+- [AMQP API Rules](https://apis.io/rules/amqp/amqp-spectral-rules/)
+
+#### Security (1)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Amqp Domain Security](https://apis.io/security/amqp/amqp-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Amqp Plans Pricing](https://apis.io/plans/amqp/amqp-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Amqp Rate Limits](https://apis.io/rate-limits/amqp/amqp-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Amqp Finops](https://apis.io/finops/amqp/amqp-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.amqp.org/)
 - [Documentation](https://www.amqp.org/resources/specifications)
-- [GitHubOrganization](https://github.com/amqp)
-- [GitHubOrganization](https://github.com/apache)
-- [JSONStructure](json-structure/amqp-message-structure.json)
-- [JSONStructure](json-structure/amqp-exchange-structure.json)
-- [JSONStructure](json-structure/amqp-queue-structure.json)
-- [SpectralRules](rules/amqp-spectral-rules.yml)
-- [Vocabulary](vocabulary/amqp-vocabulary.yaml)
+- [GitHub](https://github.com/amqp)
 
-## Features
+## API Evangelist rating
 
-| Name | Description |
-|------|-------------|
-| Reliable Messaging | Guaranteed delivery with acknowledgment and persistence support. |
-| Flexible Routing | Exchange types (direct, fanout, topic, headers) for flexible message routing. |
-| Publish/Subscribe | Fan-out delivery to multiple consumers via topic and fanout exchanges. |
-| Request/Reply | Synchronous RPC patterns over asynchronous messaging infrastructure. |
-| Transaction Support | Transactional message publishing and acknowledgment for data consistency. |
-| Security | SASL authentication and TLS encryption for secure message transport. |
-| Flow Control | Credit-based flow control preventing consumer overload (AMQP 1.0). |
-| Multi-Vendor Interoperability | Wire-level protocol interoperability across different broker implementations. |
+**Kin Score 25.9** — emerging · rubric 0.25.0 · scored 2026-10-23
 
-## UseCases
+| Facet | Score |
+|---|---|
+| Discoverability | 64.3 |
+| Contract quality | 47.9 |
+| Contract governance | 27.3 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 9.5 |
+| Access clarity | 7.9 |
 
-| Name | Description |
-|------|-------------|
-| Microservices Communication | Decoupled inter-service messaging in microservices architectures. |
-| Event Streaming | Event-driven architecture with durable, ordered event delivery. |
-| Task Queues | Distributed work queues for background job processing. |
-| IoT Messaging | Device-to-cloud and cloud-to-device messaging for IoT platforms. |
-| Financial Messaging | High-reliability financial transaction messaging with guaranteed delivery. |
-| Log Aggregation | Centralized log collection and routing from distributed systems. |
+**Agent readiness 14.7** — agent-aware
 
-## Integrations
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | — |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | derived (partial credit) |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | na |
 
-| Name | Description |
-|------|-------------|
-| RabbitMQ | Popular AMQP 0-9-1 compliant broker with extensive plugin ecosystem. |
-| Apache ActiveMQ | Java-based message broker supporting AMQP 1.0 and multiple protocols. |
-| Azure Service Bus | Microsoft's cloud messaging service with AMQP 1.0 support. |
-| Apache Qpid | AMQP 1.0 implementation with broker and client library support. |
-| Red Hat AMQ | Enterprise messaging platform based on ActiveMQ Artemis with AMQP 1.0. |
-| Solace PubSub+ | Enterprise event broker supporting AMQP 1.0 among multiple protocols. |
+**Regulatory alignment 10.8** — Horizontal (data, software, accessibility, platform)
 
-## Artifacts
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/amqp/](https://apis.io/providers/amqp/).
 
-Machine-readable API specifications organized by format.
+## How this profile is made
 
-### AsyncAPI
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
 
-- [Amqp Messaging](asyncapi/amqp-messaging.yml)
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for AMQP: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
 
-### JSON Schema
+## Open an issue
 
-- [Amqp Binding](json-schema/amqp-binding.json)
-- [Amqp Queue](json-schema/amqp-queue.json)
-- [Amqp Message](json-schema/amqp-message.json)
-- [Amqp Message Properties](json-schema/amqp-message-properties.json)
-- [Amqp Exchange](json-schema/amqp-exchange.json)
-
-### JSON Structure
-
-- [Amqp Message Structure](json-structure/amqp-message-structure.json)
-- [Amqp Message Properties Structure](json-structure/amqp-message-properties-structure.json)
-- [Amqp Binding Structure](json-structure/amqp-binding-structure.json)
-- [Amqp Exchange Structure](json-structure/amqp-exchange-structure.json)
-- [Amqp Queue Structure](json-structure/amqp-queue-structure.json)
-
-### JSON-LD
-
-- [Amqp Amqp Message Context](json-ld/amqp-amqp-message-context.jsonld)
-- [Amqp Context](json-ld/amqp-context.jsonld)
-- [Amqp Amqp Exchange Context](json-ld/amqp-amqp-exchange-context.jsonld)
-- [Amqp Amqp Binding Context](json-ld/amqp-amqp-binding-context.jsonld)
-- [Amqp Amqp Queue Context](json-ld/amqp-amqp-queue-context.jsonld)
-- [Amqp Amqp Message Properties Context](json-ld/amqp-amqp-message-properties-context.jsonld)
-
-### Examples
-
-- [Amqp Queue Example](examples/amqp-queue-example.json)
-- [Amqp Message Properties Example](examples/amqp-message-properties-example.json)
-- [Amqp Binding Example](examples/amqp-binding-example.json)
-- [Amqp Message Example](examples/amqp-message-example.json)
-- [Amqp Exchange Example](examples/amqp-exchange-example.json)
-
-## Vocabulary
-
-- [AMQP Vocabulary](vocabulary/amqp-vocabulary.yaml) — Normative vocabulary for AMQP messaging concepts including exchanges, queues, bindings, and routing patterns
-
-## Rules
-
-- [AMQP Spectral Rules](rules/amqp-spectral-rules.yml) — Rules enforcing AsyncAPI quality for AMQP specifications
-
-## Maintainers
-
-**FN:** Kin Lane
-
-**Email:** kin@apievangelist.com
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/amqp/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
