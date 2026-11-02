@@ -17,10 +17,11 @@ accessModel:
   try_now: false
   public: false
   label: Freemium
-  confidence: medium
+  confidence: low
   source:
   - plans
-  generated: '2026-07-22'
+  - security
+  generated: '2026-11-02'
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/amqp.png
 name: AMQP
